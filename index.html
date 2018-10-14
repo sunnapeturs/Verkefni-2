@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verkefni 2</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <link href="https://fonts.googleapis.com/css?family=Metal+Mania" rel="stylesheet">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+	<div class="front-page">
+        <h1>The <span>KILLER CLOWN</span> is on the loose!</h1>
+        <h2>You have to cure the Killer clown from it´s EVILNESS<br> and turn it back to a happy clown!</h2>
+        <p>Step One!<br>Put the clown into the prison with key arrows</p>
+        <i class="fas fa-arrow-down"></i>
+    </div>
+    <!-- container 100% width-->
+    <div class="container" id="container">
+        <!-- Demanturinn - on drop-->       
+        <img  draggable="true" id="spell" src="img/diamond.gif" ondrop="drop(event)">
+        <!-- container 80% width-->
+        <div class="content-container">
+            <!-- Clown - On drop/ on dragover-->
+            <img id="player"src="img/clown.png" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="stepThree">
+                <p>Step Three!<br>Let´s turn the clown into a happy clown!<br> Drag the magical diamond over the clown!</p>
+            </div>
+           <div class="prison-content">                
+                <!-- Takki - onclick - kveikir á eld -->
+                <button id="button"onclick="toKillIt()">Step Two!<br>Click! get rid of EVILNESS</button>    
+                <img id="fire" class="prison" src="img/fire.gif">
+                <img id="prison" class="prison" src="img/prison.png">	
+            </div>
+	   </div>
+    </div> 
+   
+	<script>
+// Drag stuff
+function dragStart(event) {
+}
+function allowDrop(event) {
+    event.preventDefault();
+}
+function drop(event) {
+    event.target.src = "img/happy-clown.gif";
+}
+
+// Til að stýra hvað sést þegar síða loadast
+window.addEventListener('load', function () {
+var x = document.getElementById("fire");
+var spell = document.getElementById("spell");
+var stepThree = document.getElementById("stepThree");
+x.style.display = "none";
+spell.style.display = "none";
+stepThree.style.display = "none";
+
+}, false);
+
+
+//Hreyfa trúð önnur tilraun
+var player=document.getElementById('player');
+var container=document.getElementById('container');
+//X-ás
+var playerleft = 0;
+//Y-ás
+var playertop = 0;
+function anim(e){
+
+    if(e.keyCode==39){
+        playerleft+=20;
+        player.style.left = playerleft + 'px';
+    }
+    if (e.keyCode==37){
+        playerleft-=20;
+        player.style.left = playerleft + 'px';
+    }
+    if (e.keyCode==38){
+        playertop-=20;
+        player.style.top = playertop + 'px';
+    }
+    if (e.keyCode==40){
+    playertop+=20;
+    player.style.top = playertop + 'px';
+    }
+   
+}
+document.onkeydown = anim;
+
+// Til að kveikja í trúðinum með takka og breyta í leiðinni um mynd af trúð
+function toKillIt(event) {
+    var x = document.getElementById("fire");
+    var imagex = document.getElementById("player")
+    imagex.src = "img/clown-sad.png"
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+    // þegar ýtt er á takka hverfa eða birtast element eftir 3 sec
+    did_wrok = setTimeout(doThing, 3000);
+    if (did_wrok){
+        console.log("it worked");
+    }
+
+}
+
+function doThing(){
+    var x = document.getElementById("fire");
+    var spell = document.getElementById("spell");
+    var button = document.getElementById("button");
+    var prison = document.getElementById("prison");
+    var stepThree = document.getElementById("stepThree");
+    x.style.display = "none";
+    button.style.display = "none";
+    prison.style.display = "none";
+    spell.style.display = "block";
+    stepThree.style.display = "block";
+    return true
+}
+	</script> 
+</body>
+</html>
