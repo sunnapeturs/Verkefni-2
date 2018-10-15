@@ -18,7 +18,7 @@
     <!-- container 100% width-->
     <div class="container" id="container">
         <!-- Demanturinn - on drop-->       
-        <img  draggable="true" id="spell" src="img/diamond.gif" ondrop="drop(event)">
+        <img  draggable="true" id="spell" src="img/diamond.gif" ondrop="drop(event)" ondragstart="dragStart(event)">
         <!-- container 80% width-->
         <div class="content-container">
             <!-- Clown - On drop/ on dragover-->
@@ -28,7 +28,7 @@
             </div>
            <div class="prison-content">                
                 <!-- Takki - onclick - kveikir á eld -->
-                <button id="button"onclick="toKillIt()">Step Two!<br>Click! get rid of EVILNESS</button>    
+                <button id="button"onclick="toKillIt(event)">Step Two!<br>Click! get rid of EVILNESS</button>    
                 <img id="fire" class="prison" src="img/fire.gif">
                 <img id="prison" class="prison" src="img/prison.png">	
             </div>
@@ -38,6 +38,7 @@
 	<script>
 // Drag stuff
 function dragStart(event) {
+    console.log("somthings being draged");
 }
 function allowDrop(event) {
     event.preventDefault();
@@ -89,7 +90,10 @@ document.onkeydown = anim;
 
 // Til að kveikja í trúðinum með takka og breyta í leiðinni um mynd af trúð
 function toKillIt(event) {
-    var x = document.getElementById("fire");
+
+    x = getFire();
+    if (event.isTrusted){
+    console.log(event.clientX);
     var imagex = document.getElementById("player")
     imagex.src = "img/clown-sad.png"
     if (x.style.display === "block") {
@@ -102,7 +106,12 @@ function toKillIt(event) {
     if (did_wrok){
         console.log("it worked");
     }
+  }
+}
 
+function getFire() {
+     var fire = document.getElementById("fire");
+     return fire
 }
 
 function doThing(){

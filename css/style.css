@@ -25,11 +25,9 @@
     margin-top: 20px;
     letter-spacing: 2px;
 }
-.front-page p{
-	
+.front-page p{	
 	margin-top: 150px;	
 }
-
 .fas{
 	margin-top: 50px;
 	color:red;
@@ -79,8 +77,7 @@ img{
 }
 #spell{
    height: 300px;  
-   z-index: 100; 
-  
+   z-index: 100;   
 }
 
 
